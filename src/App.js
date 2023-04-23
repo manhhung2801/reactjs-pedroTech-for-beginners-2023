@@ -1,80 +1,51 @@
 import './App.css';
-import { User } from './User';
-import { planets } from './planets';
+import { useState } from 'react';
 
 function App() {
-//  const names = ["Pedro", "Jake", "Jessica", "Mike", "Dustin", "Lukas"];
+
+ // const [age, setAge] = useState(0);
+
+  // const [inputValue, setInputValue] = useState("");
+
+  // const handleInputChange = (event) => {
+  //     setInputValue(event.target.value);
+  // };
+
+  // const [textColor, setTextColor] = useState("black");
 
 
-//     return (
-//       <div className="App">
-//           {names.map((name, key) => {
-//               return <h1 key={key}>{name}</h1>
-//           })}
-//       </div>
-//     );
-// --------------------
+  // return <div className="App">
+  //     {/* <input type="text" onChange={handleInputChange}/>
+  //     {inputValue} */}
 
-// const users = [
-//   {name: "Pedro", age: 21},
-//   {name: "Jake", age: 25},
-//   {name: "Jessica", age: 45}
-// ];
+  //     <button onClick= {() => {
+  //           setTextColor(textColor === "black" ? "red" : "black");
+  //           }}>Show/Hide</button>
+  //         <h1 style={{color : textColor}}>HI MY NAME IS MANH HUNG</h1>
+  // </div>
 
+  // vd 4
+  const [count, setCount] = useState(0);
 
-//     return (
-//       <div className="App">
-//           {users.map((user, key) => {
-//               return (
-//                   <div>
-//                     {user.name} {user.age}
-//                   </div>
-//                 );
-//           })}
-//       </div>
-//     );
-// }
-
-// --------------------
-// Exercice 
+  const increase = () => {
+      setCount(count +1);
+  }
 
 
-// const users = [
-//   {name: "Pedro", age: 21},
-//   {name: "Jake", age: 25},
-//   {name: "Jessica", age: 45}
-// ];
-
-
-//     return (
-//       <div className="App">
-//           {users.map((user, key) => {
-//               return (
-//                  <User name={user.name} age={user.age}/>
-//                 );
-//           })}
-//       </div>
-//     );
-
-
-  return (  
-  <div className="App">
-        {planets.map( (planet, key) => planet.isGasPlanet &&
-          <h1>{planet.name}</h1>
-        )}
-  </div>
-  );
-  
+  const decrease = () => {
+    setCount(count - 1);
 }
 
+const setToZero = () => {
+  setCount(0);
+}
 
-const Test = (props) => {
-    return (
-      <h1>
-          {props.n}
-          {props.isG}
-      </h1>
-    )
+  return <div className="App">
+          <button onClick={increase}>Increase</button>
+          <button onClick={decrease}>Decrease</button>
+          <button onClick={setToZero}>Set to Zero</button>
+          {count}
+  </div>
 }
 
 

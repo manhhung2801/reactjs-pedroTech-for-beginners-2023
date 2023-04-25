@@ -1,50 +1,62 @@
-import './App.css';
 import { useState } from 'react';
+import './App.css';
+import { Task } from './Task';
+
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
 
- // const [age, setAge] = useState(0);
+  const[newTask, setNewTask] = useState("");
 
-  // const [inputValue, setInputValue] = useState("");
+  const handeChange = (event) => {
+      setNewTask(event.target.value);
+  };
 
-  // const handleInputChange = (event) => {
-  //     setInputValue(event.target.value);
-  // };
+  const addTask = () => {
+    const task = {
+      id:  todoList.length === 0 ? 1 : todoList[todoList.length -1].id + 1,
+      taskName: newTask,
+      completed: false
+    }
 
-  // const [textColor, setTextColor] = useState("black");
+    setTodoList([...todoList, task]);
+  };
 
+  const deleteTask = (id) => {
+    const newTodoList = todoList.filter((task) => task.id !== id);
 
-  // return <div className="App">
-  //     {/* <input type="text" onChange={handleInputChange}/>
-  //     {inputValue} */}
+    setTodoList(newTodoList);
+  };
 
-  //     <button onClick= {() => {
-  //           setTextColor(textColor === "black" ? "red" : "black");
-  //           }}>Show/Hide</button>
-  //         <h1 style={{color : textColor}}>HI MY NAME IS MANH HUNG</h1>
-  // </div>
-
-  // vd 4
-  const [count, setCount] = useState(0);
-
-  const increase = () => {
-      setCount(count +1);
-  }
-
-
-  const decrease = () => {
-    setCount(count - 1);
-}
-
-const setToZero = () => {
-  setCount(0);
-}
-
+  const completeTask =(id) => {
+    setTodoList(
+      todoList.map((task) => {
+          if(task.id === id) {
+            return {...task, completed: true};
+          }else {
+            return task;
+          }
+      })
+    );
+  };
+ 
   return <div className="App">
-          <button onClick={increase}>Increase</button>
-          <button onClick={decrease}>Decrease</button>
-          <button onClick={setToZero}>Set to Zero</button>
-          {count}
+        <div className="addTask">
+          <input onChange={handeChange}/>
+          <button onClick={addTask}>Add Task</button>
+        </div>
+        <div className="list">
+          {todoList.map((task) => {
+              return (<Task 
+                    taskName={task.taskName} 
+                    id={task.id} 
+                    completed={task.completed}
+                    deleteTask={deleteTask}
+                    completeTask={completeTask}
+
+              />);
+          })}
+        </div>
   </div>
 }
 
